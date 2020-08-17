@@ -4,15 +4,41 @@
      class="example-list"
      (cdkDropListDropped)="drop($event)">
   <div class="example-box"
-       *ngFor="let item of items"
+       [attr.data-id]="item.id"
+       *ngFor="let item of items$ | async"
        cdkDrag>
     <div class="example-custom-placeholder"
          *cdkDragPlaceholder></div>
-    {{ item }}
+    <mat-icon>reorder</mat-icon>
+    <button mat-icon-button
+            color="primary"
+            aria-label="Example icon button with a menu icon">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <span>{{item.name}}</span>
+    <mat-divider></mat-divider>
+    <div *ngIf="item.project">{{ item.project }}
+
+
+    </div>
+    <span *ngIf="!item.project">No Project</span>
+    <mat-divider></mat-divider>
+    <span *ngIf="item.dueDate">{{ item.dueDate | date:'shortDate'  }} {{ item.dueDate | date:'shortTime' }}</span>
+    <span *ngIf="!item.dueDate">No Due Date</span>
+    <mat-divider></mat-divider>
+
+    <button mat-button
+            *ngIf="!item.completed">
+      <mat-icon>radio_button_unchecked</mat-icon>
+    </button>
+    <button mat-button
+            *ngIf="item.completed">
+      <mat-icon>radio_button_checked</mat-icon>
+    </button>
   </div>
 </div>
 
-<pre>{{ items | json }}</pre>
+
 <button mat-button
         (click)="done()"
         color="primary">Close</button>

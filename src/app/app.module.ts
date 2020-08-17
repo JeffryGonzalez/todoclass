@@ -17,6 +17,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { reducers } from './reducers';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +29,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     TodoListComponent
   ],
   imports: [
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument(),
+    StoreRouterConnectingModule.forRoot(),
     DragDropModule,
     MatDialogModule,
     MatChipsModule,
