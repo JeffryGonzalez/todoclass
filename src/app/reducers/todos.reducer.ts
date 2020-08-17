@@ -19,7 +19,7 @@ export const adapter = createEntityAdapter<TodoEntity>();
 const initialState: TodoState = {
   ids: ['1', '2', '3'],
   entities: {
-    1: { id: '1', name: 'Change Light Bulbs', project: 'House', completed: false },
+    1: { id: '1', name: 'Change Light Bulbs', project: null, completed: false },
     2: { id: '2', name: 'Clean Garage', completed: true },
     3: { id: '3', name: 'Take Car to Shop', completed: false, dueDate: '2020-08-23' }
   },

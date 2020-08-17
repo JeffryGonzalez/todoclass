@@ -29,13 +29,27 @@ const selectTodoSorts = createSelector(selectTodosBranch, b => b.sort);
 
 // Observable<TodoItem[]>
 
-export const selectAllTodoList = createSelector(
-  selectTodoEntities,
-  selectTodoSorts, // ['2', '1', '3']
-  (todos, sort) => sort.map(s => todos[s]) as fromModels.TodoItem[]
+// export const selectAllTodoList = createSelector(
+//   selectTodoEntities,
+//   selectTodoSorts, // ['2', '1', '3']
+//   (entities, sort) => {
+//     console.log({ sort });
+//     const result = sort.map(s => entities[s]);
+//     console.log({ result });
+//     return result as fromModels.TodoItem[];
+//   }
+// );
+
+// export const selectInboxTodoList = createSelector(
+//   selectAllTodoList,
+//   (todos) => todos.filter(t => !t.project)
+// );
+
+const selectSortedTodos = createSelector(selectTodoSorts, selectTodoEntities,
+  (sort, entities) => sort.map(s => entities[s])
 );
 
 export const selectInboxTodoList = createSelector(
-  selectAllTodoList,
+  selectSortedTodos,
   (todos) => todos.filter(t => !t.project)
 );
