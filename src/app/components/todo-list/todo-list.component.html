@@ -1,0 +1,18 @@
+<h3>Inbox (whatever they are filtering on)</h3>
+
+<div cdkDropList
+     class="example-list"
+     (cdkDropListDropped)="drop($event)">
+  <div class="example-box"
+       *ngFor="let item of items"
+       cdkDrag>
+    <div class="example-custom-placeholder"
+         *cdkDragPlaceholder></div>
+    {{ item }}
+  </div>
+</div>
+
+<pre>{{ items | json }}</pre>
+<button mat-button
+        (click)="done()"
+        color="primary">Close</button>

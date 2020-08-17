@@ -14,13 +14,19 @@ import { MatListModule } from '@angular/material/list';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    DashboardComponent
+    DashboardComponent,
+    TodoListComponent
   ],
   imports: [
+    DragDropModule,
+    MatDialogModule,
     MatChipsModule,
     MatCardModule,
     BrowserModule,
