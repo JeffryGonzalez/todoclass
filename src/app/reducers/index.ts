@@ -58,3 +58,10 @@ export const selectDashboardProjects = createSelector(
     count: todos.filter(t => t.project === p.name).length
   } as fromModels.DashboardProject))
 );
+
+export const selectListForProject = createSelector(
+  selectAllTodos,
+  (todos, props) => {
+    return todos.filter((t: fromTodos.TodoEntity) => t.project === props.name) as fromModels.TodoItem[];
+  }
+);

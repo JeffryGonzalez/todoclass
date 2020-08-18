@@ -34,11 +34,18 @@ export class DashboardComponent implements OnInit {
       if (params.inbox) {
         this.showList();
       }
+      if (params.project) {
+        this.showProject(params.project);
+      }
     });
   }
 
+  private showProject(project: string): void {
+    const dlg = this.dialog.open(TodoListComponent, { disableClose: true, data: { filter: project } });
+    dlg.afterClosed().subscribe(_ => this.router.navigate(['dashboard']));
+  }
   private showList(): void {
-    const dlg = this.dialog.open(TodoListComponent, { disableClose: true });
+    const dlg = this.dialog.open(TodoListComponent, { disableClose: true, data: { filter: 'inbox' } });
     dlg.afterClosed().subscribe(_ => this.router.navigate(['dashboard']));
   }
 
