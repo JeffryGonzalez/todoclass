@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import { MatBottomSheet, MatBottomSheetConfig } from '@angular/material/bottom-sheet';
 import { TodoListComponent } from '../todo-list/todo-list.component';
+import { TodoEntryComponent } from '../todo-entry/todo-entry.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +14,11 @@ import { TodoListComponent } from '../todo-list/todo-list.component';
 export class DashboardComponent implements OnInit {
 
   routeQueryParams$: Subscription;
-  constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private dialog: MatDialog,
+    private bottomSheet: MatBottomSheet) { }
 
   ngOnInit(): void {
     this.routeQueryParams$ = this.route.queryParams.subscribe(params => {
@@ -27,4 +33,11 @@ export class DashboardComponent implements OnInit {
     dlg.afterClosed().subscribe(_ => this.router.navigate(['dashboard']));
   }
 
+  addItem(): void {
+    const config: MatBottomSheetConfig = {
+      disableClose: true,
+      autoFocus: true
+    };
+    this.bottomSheet.open(TodoEntryComponent, config);
+  }
 }

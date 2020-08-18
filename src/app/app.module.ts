@@ -21,14 +21,26 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { reducers } from './reducers';
+import { TodoEntryComponent } from './components/todo-entry/todo-entry.component';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     DashboardComponent,
-    TodoListComponent
+    TodoListComponent,
+    TodoEntryComponent
   ],
   imports: [
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatBottomSheetModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
     StoreRouterConnectingModule.forRoot(),
