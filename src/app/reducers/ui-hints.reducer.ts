@@ -13,6 +13,13 @@ const reducerFunction = createReducer(
   on(actions.todoItemSorted, (state, action) => {
     const newSort = move(state.inboxSort, action.previousIndex, action.currentIndex);
     return { ...state, inboxSort: newSort };
+  }),
+  on(actions.todoAdded, (state, action) => {
+    if (!action.payload.project) {
+      return ({ ...state, inboxSort: [action.payload.id, ...state.inboxSort] });
+    } else {
+      return state;
+    }
   })
 );
 

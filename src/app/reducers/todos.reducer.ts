@@ -23,7 +23,6 @@ const initialState: TodoState = {
     2: { id: '2', name: 'Clean Garage', completed: true },
     3: { id: '3', name: 'Take Car to Shop', completed: false, dueDate: '2020-08-23' }
   },
-  // sort: ['1', '2', '3']
 };
 
 const reducerFunction = createReducer(
