@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Project } from 'src/app/models';
 import { Store, select } from '@ngrx/store';
 import { AppState, selectAllProjectsList } from 'src/app/reducers';
+import { todoAdded } from 'src/app/actions/todo.actions';
 
 @Component({
   selector: 'app-todo-entry',
@@ -33,7 +34,10 @@ export class TodoEntryComponent implements OnInit {
 
   submit(): void {
     console.log(this.form.value);
-    // Dispatch an action.. TODO
+    this.store.dispatch(todoAdded({
+      ...this.form.value,
+      dueDate: this.form.value.dueDate?.toISOString()
+    }));
     this.form.reset();
     this.bottomSheetRef.dismiss();
   }

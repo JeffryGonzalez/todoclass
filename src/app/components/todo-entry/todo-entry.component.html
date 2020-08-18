@@ -16,8 +16,9 @@
     <mat-form-field class="example-full-width"
                     appearance="fill">
       <mat-label>Due Date</mat-label>
+      <!-- todo: fix this so we can do a time-->
       <input matInput
-             type="datetime-local"
+             type="datetime"
              formControlName="dueDate"
              [matDatepicker]="picker">
       <mat-datepicker-toggle matSuffix
@@ -44,5 +45,3 @@
             mat-button>Cancel</button>
   </div>
 </form>
-
-<pre> {{ form.value | json }}</pre>
