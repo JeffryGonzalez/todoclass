@@ -29,10 +29,14 @@ const selectUiHintsBranch = (state: AppState) => state.uiHints;
 // Any Helpers?
 
 const { selectEntities: selectTodoEntities } = fromTodos.adapter.getSelectors(selectTodosBranch);
+const { selectAll: selectAllProjects } = fromProjects.adapter.getSelectors(selectProjectBranch);
 const selectInboxTodoSorts = createSelector(selectUiHintsBranch, b => b.inboxSort);
 // Selectors for Components
 
-
+export const selectAllProjectsList = createSelector(
+  selectAllProjects,
+  (p) => p as fromModels.Project[]
+);
 
 const selectSortedInboxTodos = createSelector(
   selectInboxTodoSorts,

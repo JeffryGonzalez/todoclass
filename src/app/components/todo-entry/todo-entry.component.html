@@ -13,6 +13,30 @@
     </mat-form-field>
   </div>
   <div>
+    <mat-form-field class="example-full-width"
+                    appearance="fill">
+      <mat-label>Due Date</mat-label>
+      <input matInput
+             type="datetime-local"
+             formControlName="dueDate"
+             [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix
+                             [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <mat-form-field appearance="fill">
+    <mat-label>Project</mat-label>
+    <mat-select formControlName="project">
+      <mat-option value=""></mat-option>
+      <mat-option *ngFor="let p of projects$ | async"
+                  value="{{p.name}}">{{p.name}}</mat-option>
+
+    </mat-select>
+  </mat-form-field>
+  <div>
     <button mat-button
             (click)="submit()"
             [disabled]="form.invalid">Submit</button>
@@ -20,3 +44,5 @@
             mat-button>Cancel</button>
   </div>
 </form>
+
+<pre> {{ form.value | json }}</pre>
