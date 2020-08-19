@@ -32,13 +32,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { TodosEffects } from './effects/todos.effects';
+import { LoginComponent } from './components/login/login.component';
+import { AuthEffects } from './effects/auth.effects';
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     DashboardComponent,
     TodoListComponent,
-    TodoEntryComponent
+    TodoEntryComponent,
+    LoginComponent
   ],
   imports: [
     HttpClientModule,
@@ -52,7 +55,7 @@ import { TodosEffects } from './effects/todos.effects';
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
     StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([TodosEffects]),
+    EffectsModule.forRoot([TodosEffects, AuthEffects]),
     DragDropModule,
     MatDialogModule,
     MatChipsModule,
