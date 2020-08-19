@@ -10,6 +10,13 @@ const initialState: UiHintsState = {
 
 const reducerFunction = createReducer(
   initialState,
+  on(actions.todoAddedSucceeded, (state, action) => {
+    if (!action.payload.project) {
+      return ({ ...state, inboxSort: replaceIdWithNewId(state.inboxSort, action.oldId, action.payload.id) });
+    } else {
+      return state;
+    }
+  }),
   on(actions.loadTodosSucceeded, (state, action) => {
     const ids = action.todos
       .filter(t => !t.project)
@@ -29,6 +36,12 @@ const reducerFunction = createReducer(
     }
   })
 );
+
+function replaceIdWithNewId(array: string[], oldId: string, newId: string): string[] {
+  const idx = array.indexOf(oldId);
+  const newSort = Object.assign([], array, { [idx]: newId });
+  return newSort;
+}
 
 export function reducer(state: UiHintsState, action: Action): UiHintsState {
   return reducerFunction(state, action);

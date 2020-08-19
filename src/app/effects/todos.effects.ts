@@ -8,6 +8,21 @@ import { TodoEntity } from '../reducers/todos.reducer';
 @Injectable()
 export class TodosEffects {
 
+  // todoAdded -> save it at the api -> todoAddedSuccess | todoAddedFailure
+  saveTodo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.todoAdded),
+      switchMap((originalAction) => this.client.post<TodoEntity>(environment.apiUrl + 'todos', {
+        name: originalAction.payload.name,
+        project: originalAction.payload.project,
+        dueDate: originalAction.payload.dueDate,
+        completed: originalAction.payload.completed
+      }).pipe(
+        map(response => actions.todoAddedSucceeded({ oldId: originalAction.payload.id, payload: response }))
+      ))
+    ), { dispatch: true }
+  );
+
   // loadTodos -> go to the api -> (loadTodosSucceeded | loadTodosFailed)
 
   loadData$ = createEffect(() =>

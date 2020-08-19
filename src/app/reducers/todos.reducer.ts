@@ -21,7 +21,12 @@ const initialState = adapter.getInitialState();
 const reducerFunction = createReducer(
   initialState,
   on(actions.todoAdded, (state, action) => adapter.addOne(action.payload, state)),
-  on(actions.loadTodosSucceeded, (state, action) => adapter.addMany(action.todos, state))
+  on(actions.loadTodosSucceeded, (state, action) => adapter.addMany(action.todos, state)),
+  on(actions.todoAddedSucceeded, (state, action) => {
+    // the old switcharoo
+    const tempState = adapter.removeOne(action.oldId, state);
+    return adapter.addOne(action.payload, tempState);
+  })
 );
 
 export function reducer(state: TodoState = initialState, action: Action): TodoState {

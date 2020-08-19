@@ -20,6 +20,15 @@ export const todoAdded = createAction(
   })
 );
 
+export const todoAddedSucceeded = createAction(
+  '[todo] todo added succeeded',
+  props<{ oldId: string, payload: TodoEntity }>()
+);
+
+export const todoAddedFailed = createAction(
+  '[todo] todo added failed',
+  props<{ payload: TodoEntity, message: string }>()
+);
 
 export const loadTodos = createAction(
   '[todos] load todos'
@@ -34,3 +43,5 @@ export const loadTodosFailed = createAction(
   '[todos] loading todos failed',
   props<{ error: string }>()
 );
+
+
