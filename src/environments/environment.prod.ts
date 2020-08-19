@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+
+  apiUrl: 'http://REAL LIVE SERVER/',
+  authUrl: 'http://REAL AUTH SERVER/auth/login'
 };

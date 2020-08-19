@@ -35,6 +35,7 @@ import { TodosEffects } from './effects/todos.effects';
 import { LoginComponent } from './components/login/login.component';
 import { AuthEffects } from './effects/auth.effects';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { AdminModule } from './features/admin/admin.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
     MatChipsModule,
     MatCardModule,
     BrowserModule,
+    // AdminModule, // THIS WILL BE LAZY LOADED
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
