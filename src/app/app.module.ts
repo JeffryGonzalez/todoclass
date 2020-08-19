@@ -29,11 +29,12 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { TodosEffects } from './effects/todos.effects';
 import { LoginComponent } from './components/login/login.component';
 import { AuthEffects } from './effects/auth.effects';
+import { AuthInterceptor } from './services/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +71,9 @@ import { AuthEffects } from './effects/auth.effects';
     MatIconModule,
     MatListModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
