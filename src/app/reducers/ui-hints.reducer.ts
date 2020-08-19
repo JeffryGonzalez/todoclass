@@ -5,11 +5,18 @@ export interface UiHintsState {
 }
 
 const initialState: UiHintsState = {
-  inboxSort: ['2', '3']
+  inboxSort: []
 };
 
 const reducerFunction = createReducer(
   initialState,
+  on(actions.loadTodosSucceeded, (state, action) => {
+    const ids = action.todos
+      .filter(t => !t.project)
+      .map(t => t.id);
+
+    return ({ ...state, inboxSort: ids }); // sort them in the order they come from the api
+  }),
   on(actions.todoItemSorted, (state, action) => {
     const newSort = move(state.inboxSort, action.previousIndex, action.currentIndex);
     return { ...state, inboxSort: newSort };

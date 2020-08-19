@@ -19,3 +19,18 @@ export const todoAdded = createAction(
     } as TodoEntity
   })
 );
+
+
+export const loadTodos = createAction(
+  '[todos] load todos'
+);
+
+export const loadTodosSucceeded = createAction(
+  '[todos] load todos succeeded',
+  props<{ todos: TodoEntity[] }>()
+);
+
+export const loadTodosFailed = createAction(
+  '[todos] loading todos failed',
+  props<{ error: string }>()
+);
